@@ -53,21 +53,18 @@ void init_SW() {
 	PORTC->PCR[12] |= PORT_PCR_MUX(1) | PORT_PCR_IRQC(0x0A) | PORT_PCR_PE_MASK | PORT_PCR_PS_MASK;
 	PTC->PDDR &= ~(1 << 12);
 	
-	NVIC_SetPriority(PORTC_PORTD_IRQn, 1);
-	NVIC_SetPriority(SysTick_IRQn, 2);
-	
 	NVIC_ClearPendingIRQ(PORTC_PORTD_IRQn);
 	
 	NVIC_EnableIRQ(PORTC_PORTD_IRQn);
 }
 
 void PORTC_PORTD_IRQHandler(void) {
-	if (!(PTC->PDIR & 1 << 3)) {
-		isSyspause = 1 - isSyspause;
-		PORTC->PCR[3] |= PORT_PCR_ISF_MASK;
-	}
 	if (!(PTC->PDIR & 1 << 12)) {
 		NVIC_SystemReset();
 		PORTC->PCR[12] |= PORT_PCR_ISF_MASK;  
+	}
+	if (!(PTC->PDIR & 1 << 3)) {
+		isSyspause = 1 - isSyspause;
+		PORTC->PCR[3] |= PORT_PCR_ISF_MASK;
 	}
 }
