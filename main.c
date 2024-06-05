@@ -6,14 +6,13 @@
 #include "stdio.h"
 #include "math.h"
 
-int16_t x_offset = 0;
-int16_t y_offset = 0;
-int16_t x_max = -1000;
-int16_t x_min = 1000;
-int16_t y_max = -1000;
-int16_t y_min = 1000;
+float x_offset = 0;
+float y_offset = 0;
+float x_max = -1000;
+float x_min = 1000;
+float y_max = -1000;
+float y_min = 1000;
 float x_scale = 1, y_scale = 1;
-char a[30];
 
 extern volatile uint8_t isSyspause;
 
@@ -36,8 +35,8 @@ void mag_calibrate() {
 	}
 	x_offset = (x_max + x_min) / 2;
 	y_offset = (y_max + y_min) / 2;
-	x_scale = (x_max - x_min) * 1000;
-	y_scale = (y_max - y_min) * 1000;
+	x_scale = (x_max - x_min) / 2 / 10;
+	y_scale = (y_max - y_min) / 2 / 10;
 }
 
 int main() {
@@ -57,16 +56,15 @@ int main() {
 			x = read_mag(0x01) << 8 | read_mag(0x02);
 			y = read_mag(0x03) << 8 | read_mag(0x04);
 
-			x_float = (float)(x - x_offset) * y_scale;
-			y_float = (float)(y - y_offset) * x_scale;
+			x_float = (float)(x - x_offset) * x_scale;
+			y_float = (float)(y - y_offset) * y_scale;
 			angle = (int16_t) (atan2(y_float, x_float) * 180 / 3.1415);
 			if (angle < 0)
 				angle += 360;
 			sLCD_write_number(angle);
 			delay(200);
 		}
-		else {
-			
+		else {		
 		}
 	}
 }
