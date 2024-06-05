@@ -99,22 +99,7 @@ void sLCD_write_number(uint16_t number) {
 		number=number-10;
 	}
 	 numberdigi[0]=number;
-	
-//	int j=4;
-//	if (numberdigi[3] == 0)
-//	{
-//		j--;
-//		if (numberdigi[2] == 0) {
-//			j--;
-//			if (numberdigi[1] == 0) {
-//				j--;
-//				if (numberdigi[0] == 0) {
-//					j--;
-//				}
-//			}
-//		}
-//	}
-	 
+
 	for(uint8_t i=0;i<4;i++)
 	{
 		sLCD_write(i,numberdigi[i]);
