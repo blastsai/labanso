@@ -1,7 +1,3 @@
-/*  
-	SLCD Library by Filip Swiatek
-	Designed to use with FRDM KL46Z Board.
-*/
 #include "lcd.h"
 
 
@@ -50,15 +46,15 @@ void init_lcd(void){
 								|LCD_PEN_PEN(1<<17)
 								|LCD_PEN_PEN(1<<18)
 								|LCD_PEN_PEN(1<<19);
-	LCD->PEN[1] = LCD_PEN_PEN(1<<5) 
-								|LCD_PEN_PEN(1<<6) 
-								|LCD_PEN_PEN(1<<8)
-								|LCD_PEN_PEN(1<<20)
-								|LCD_PEN_PEN(1<<21);
+	LCD->PEN[1] = LCD_PEN_PEN(1<<5) //P37
+								|LCD_PEN_PEN(1<<6) //P38
+								|LCD_PEN_PEN(1<<8) //P40
+								|LCD_PEN_PEN(1<<20) //P52
+								|LCD_PEN_PEN(1<<21); //P53
 								
 	//Config back plane, front plane
-	LCD->BPEN[0] = LCD_BPEN_BPEN(1<<18) | LCD_BPEN_BPEN(1<<19);
-	LCD->BPEN[1] = LCD_BPEN_BPEN(1<<8) | LCD_BPEN_BPEN(1<<20);
+	LCD->BPEN[0] = LCD_BPEN_BPEN(1<<18) | LCD_BPEN_BPEN(1<<19); //P18, P19
+	LCD->BPEN[1] = LCD_BPEN_BPEN(1<<8) | LCD_BPEN_BPEN(1<<20); //P40, P52
 	
 	//Config COM pin
 	LCD->WF8B[40] = (1<<0) | (1 << 4); //COM0 for phase A, E

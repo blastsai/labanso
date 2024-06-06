@@ -35,8 +35,8 @@ void mag_calibrate() {
 	}
 	x_offset = (x_max + x_min) / 2;
 	y_offset = (y_max + y_min) / 2;
-	x_scale = (x_max - x_min) / 2 / 10;
-	y_scale = (y_max - y_min) / 2 / 10;
+	x_scale = 2/(x_max - x_min) ;
+	y_scale = 2/(y_max - y_min) ;
 }
 
 int main() {

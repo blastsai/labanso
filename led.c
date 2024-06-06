@@ -30,8 +30,8 @@ void SysTick_Handler(void) {
 }	
 
 void delay(uint16_t delay) {
-	while (msTick < delay);
 	msTick = 0;
+	while (msTick < delay);
 }
 
 void init_LED() {
